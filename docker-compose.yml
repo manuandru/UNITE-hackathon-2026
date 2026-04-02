@@ -1,0 +1,53 @@
+# ─────────────────────────────────────────────────────────
+#  NYC Bus Delay Prediction — Docker Compose
+#
+#  Services:
+#    notebook   — Jupyter notebook to train & save the model
+#    backend    — FastAPI: prediction API + bus simulator WS
+#    dashboard  — React dashboard served by Nginx
+#
+#  Mount:
+#    ./notebook/model — host folder mounted into backend at /model
+#
+#  Usage:
+#    Step 1:  docker compose up notebook
+#             → Open http://localhost:8888, run train_model.ipynb
+#    Step 2:  docker compose up backend dashboard
+#             → Open http://localhost:3000
+# ─────────────────────────────────────────────────────────
+
+services:
+
+  # ── Backend: FastAPI ──────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+    container_name: bus-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./notebook/model:/model
+    environment:
+      - MODEL_DIR=/model
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ── Dashboard: React + Nginx ──────────────────────────
+  dashboard:
+    build:
+      context: ./dashboard
+      args:
+        # In production replace with your actual backend hostname
+        REACT_APP_API_URL: http://localhost:8000
+        REACT_APP_WS_URL: ws://localhost:8000/ws/buses
+    container_name: bus-dashboard
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

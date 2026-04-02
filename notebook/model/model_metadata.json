@@ -1,0 +1,52 @@
+{
+  "feature_names": [
+    "School_Year",
+    "Run_Type",
+    "Bus_No",
+    "Route_Number",
+    "Reason",
+    "Schools_Serviced",
+    "Occurred_On",
+    "Created_On",
+    "Boro",
+    "Bus_Company_Name",
+    "How_Long_Delayed",
+    "Number_Of_Students_On_The_Bus",
+    "Has_Contractor_Notified_Schools",
+    "Has_Contractor_Notified_Parents",
+    "Have_You_Alerted_OPT",
+    "Informed_On",
+    "Incident_Number",
+    "Last_Updated_On",
+    "Breakdown_or_Running_Late",
+    "School_Age_or_PreK"
+  ],
+  "target_classes": [
+    "Breakdown",
+    "Running Late"
+  ],
+  "categorical_columns": [
+    "School_Year",
+    "Run_Type",
+    "Bus_No",
+    "Route_Number",
+    "Reason",
+    "Schools_Serviced",
+    "Occurred_On",
+    "Created_On",
+    "Boro",
+    "Bus_Company_Name",
+    "How_Long_Delayed",
+    "Has_Contractor_Notified_Schools",
+    "Has_Contractor_Notified_Parents",
+    "Have_You_Alerted_OPT",
+    "Informed_On",
+    "Incident_Number",
+    "Last_Updated_On",
+    "Breakdown_or_Running_Late",
+    "School_Age_or_PreK"
+  ],
+  "n_estimators": 150,
+  "max_depth": 12,
+  "dataset": "Bus-Breakdown-and-Delays-NYC (OpenML ID 43484)"
+}
