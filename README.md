@@ -12,7 +12,7 @@ A full-stack machine learning tutorial demonstrating how to build, deploy, and v
 ## Project Structure
 
 ```
-traffic-ml-demo/
+UNITE-hackathon-2026/
 ├── notebook/
 │   ├── train_model.ipynb     ← ML training pipeline
 ├── backend/
@@ -58,7 +58,14 @@ flowchart TD
 
 ## Quick Start
 
-### Start the Dashboard
+### 1. Clone the repository
+
+```bash
+git clone <repository-url> UNITE-hackathon-2026
+cd UNITE-hackathon-2026
+```
+
+### 2. Start the Dashboard
 
 ```bash
 docker compose up
